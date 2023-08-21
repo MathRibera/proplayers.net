@@ -17,7 +17,7 @@ export default function Home() {
     e.preventDefault()
     if (form.auth !== 'secret') return alert('Wrong auth')
     if (!form.name || !form.country || !form.image) return alert('Missing fields')
-    await fetch(process.env.BACKEND_URL + 'api/create/team', {
+    await fetch(`${process.env.BACKEND_URL}api/create/team`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
