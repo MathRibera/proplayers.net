@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 
 export default function Home() {
   const DEFAULT_VALUE = {
@@ -12,6 +12,10 @@ export default function Home() {
     ...DEFAULT_VALUE,
     success: false
   })
+
+  useEffect(() => {
+    console.log(process.env)
+  }, [])
 
   const createTeam = async (e: any) => {
     e.preventDefault()
