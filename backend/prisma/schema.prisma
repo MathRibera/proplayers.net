@@ -14,7 +14,7 @@ model ProPlayers {
   id           Int            @id @default(autoincrement())
   name         String
   nick         String
-  age          Int
+  age          String
   role         String
   country      String
   image        String

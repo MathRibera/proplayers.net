@@ -36,15 +36,16 @@ export class CreateController {
     @Body('country') country: string,
     @Body('image') image: string,
     @Body('nick') nick: string,
-    @Body('teamId') teamId: number,
+    @Body('teamId') teamId: string,
     @Body('role') role: string,
-    @Body('age') age: number,
+    @Body('age') age: string,
     @Body('auth') auth: string,
   ) {
+    console.log(name, country, image, nick, teamId, role, age, auth);
     if (auth !== 'secret') {
       return { message: 'Not authorized' };
     } else {
-      await this.createService.createProPlayer({
+      return this.createService.createProPlayer({
         name,
         country,
         image,
@@ -54,7 +55,6 @@ export class CreateController {
         age,
         auth,
       });
-      return { message: 'Player created' };
     }
   }
 }

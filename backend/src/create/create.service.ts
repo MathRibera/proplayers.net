@@ -19,9 +19,9 @@ export class CreateService {
     country: string;
     image: string;
     nick: string;
-    teamId: number;
+    teamId: string;
     role: string;
-    age: number;
+    age: string;
     auth: string;
   }) {
     if (auth !== 'secret') {
@@ -33,7 +33,7 @@ export class CreateService {
           country,
           image,
           nick,
-          teamId,
+          teamId: +teamId,
           role,
           age,
         },

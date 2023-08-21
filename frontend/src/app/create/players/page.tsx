@@ -8,7 +8,7 @@ export default function Home() {
     image: '',
     nick: '',
     role: '',
-    teamId: '',
+    teamId: 0,
     age: '',
     auth: '',
     teams: []
@@ -38,9 +38,9 @@ export default function Home() {
       },
       body: JSON.stringify(form)
     })
-    setForm({...DEFAULT_VALUE, success: true })
+    setForm({...DEFAULT_VALUE, ...form.teams, success: true })
     setTimeout(() => {
-      setForm({...DEFAULT_VALUE, success: false})
+      setForm({...form, success: false})
     }, 2000)
   }
   return (
@@ -55,7 +55,7 @@ export default function Home() {
             Name
             </label>
           <input
-            type="number"
+            type="text"
             id="name"
             name="name"
             value={form.name}
@@ -69,7 +69,7 @@ export default function Home() {
             className="mb-1 mt-2 border-t-2 border-black"
             >Age</label>
           <input
-            type="text"
+            type="date"
             id="age"
             name="age"
             value={form.age}
@@ -136,7 +136,7 @@ export default function Home() {
             value={form.teamId}
             className='mb-4 w-96 h-6 rounded-lg'
             onChange={
-              (e) => setForm({...form, teamId: e.target.value})
+              (e) => setForm({...form, teamId: Number(e.target.value)})
             }
             >
             <option value=""></option>
