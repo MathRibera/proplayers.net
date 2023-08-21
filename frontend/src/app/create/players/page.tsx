@@ -38,9 +38,9 @@ export default function Home() {
       },
       body: JSON.stringify(form)
     })
-    setForm({...DEFAULT_VALUE, ...form.teams, success: true })
+    setForm({...DEFAULT_VALUE, teams: form.teams, success: true })
     setTimeout(() => {
-      setForm({...form, success: false})
+      setForm({...DEFAULT_VALUE, teams: form.teams, success: false})
     }, 2000)
   }
   return (
