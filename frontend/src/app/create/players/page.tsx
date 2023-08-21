@@ -19,6 +19,7 @@ export default function Home() {
   })
 
   useEffect(() => {
+    console.log(process.env)
     const getTeams = async () => {
       const res = await fetch(`${process.env.BACKEND_URL}api/list/teams`)
       const data = await res.json()
