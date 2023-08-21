@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model ProPlayers {
+  id           Int            @id @default(autoincrement())
+  name         String
+  nick         String
+  age          Int
+  role         String
+  country      String
+  image        String
+  teamId       Int
+  team         ProTeams       @relation(fields: [teamId], references: [id])
+  ProIdMatches ProIdMatches[]
+  ProMatches   ProMatches[]
+}
+
+model ProTeams {
+  id         Int          @id @default(autoincrement())
+  name       String
+  country    String
+  image      String
+  ProPlayers ProPlayers[]
+}
+
+model Accounts {
+  id       Int     @id @default(autoincrement())
+  nickName String
+  server   String
+  region   String
+  proId    Int
+  pro      ProData @relation(fields: [proId], references: [id])
+}
+
+model ProData {
+  id         Int          @id @default(autoincrement())
+  puuid      String
+  accountId  String
+  nick       String
+  region     String
+  server     String
+  ProMatches ProMatches[]
+  Accounts   Accounts[]
+}
+
+model ProIdMatches {
+  id          Int        @id @default(autoincrement())
+  matchId     String
+  region      String
+  nick        String
+  proPlayerId Int
+  server      String
+  proPlayer   ProPlayers @relation(fields: [proPlayerId], references: [id])
+}
+
+model ProMatches {
+  id          Int        @id @default(autoincrement())
+  matchId     String
+  proPlayerId Int
+  proPlayer   ProPlayers @relation(fields: [proPlayerId], references: [id])
+  win         Boolean
+  kills       Int
+  deaths      Int
+  assists     Int
+  cs          Int
+  gold        Int
+  teamId      Int
+  proId       Int
+  pro         ProData    @relation(fields: [proId], references: [id])
+  lane        String
+  champion    String
+  allyOne     String
+  allyTwo     String
+  allyThree   String
+  allyFour    String
+  allyFive    String
+  enemyOne    String
+  enemyTwo    String
+  enemyThree  String
+  enemyFour   String
+  enemyFive   String
+}
