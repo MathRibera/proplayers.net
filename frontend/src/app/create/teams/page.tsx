@@ -15,9 +15,10 @@ export default function Home() {
 
   const createTeam = async (e: any) => {
     e.preventDefault()
+    console.log(process.env)
     if (form.auth !== 'secret') return alert('Wrong auth')
     if (!form.name || !form.country || !form.image) return alert('Missing fields')
-    await fetch(`${process.env.BACKEND_URL}api/create/team`, {
+    await fetch(`${process.env.BACKEND_URL_DEV}api/create/team`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
