@@ -30,7 +30,7 @@ export class CreateController {
     }
   }
 
-  @Post('players')
+  @Post('player')
   async createPlayer(
     @Body('name') name: string,
     @Body('country') country: string,
