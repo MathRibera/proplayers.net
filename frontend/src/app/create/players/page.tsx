@@ -20,7 +20,7 @@ export default function Home() {
 
   useEffect(() => {
     const getTeams = async () => {
-      const res = await fetch('http://localhost:3000/api/list/teams')
+      const res = await fetch(process.env.BACKEND_URL + '/api/teams')
       const data = await res.json()
       setForm({...form, teams: data})
     }
@@ -31,7 +31,7 @@ export default function Home() {
     e.preventDefault()
     if (form.auth !== 'secret') return alert('Wrong auth')
     if (!form.name || !form.country || !form.image) return alert('Missing fields')
-    await fetch('http://localhost:3000/api/create/player', {
+    await fetch(process.env.BACKEND_URL + 'api/create/player', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
