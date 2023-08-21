@@ -37,6 +37,7 @@ model Accounts {
   nickName String
   server   String
   region   String
+  puuid    String
   proId    Int
   pro      ProData @relation(fields: [proId], references: [id])
 }
