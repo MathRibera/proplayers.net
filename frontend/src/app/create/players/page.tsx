@@ -20,7 +20,7 @@ export default function Home() {
 
   useEffect(() => {
     const getTeams = async () => {
-      const res = await fetch('http://localhost:3000/api/teams')
+      const res = await fetch('http://localhost:3000/api/list/teams')
       const data = await res.json()
       setForm({...form, teams: data})
     }
@@ -126,11 +126,28 @@ export default function Home() {
             <option value="adc">ADC</option>
             <option value="support">Support</option>
           </select>
-
+          <label
+            htmlFor="teamId"
+            className="mt-2 mb-1 border-t-2 border-black"
+            >Teams</label>
+          <select
+            id="teamId"
+            name="teamId"
+            value={form.teamId}
+            className='mb-4 w-96 h-6 rounded-lg'
+            onChange={
+              (e) => setForm({...form, teamId: e.target.value})
+            }
+            >
+            <option value=""></option>
+            {form.teams.map((team: any) => (
+              <option key={team.id} value={team.id}>{team.name}</option>
+            )).sort((a: any, b: any) => a.name - b.name)}
+          </select>
           <label
             htmlFor="image"
             className="mb-1 mt-2 border-t-2 border-black"
-            >Logo team URL</label>
+            >Player image URL</label>
           <textarea
             id="image"
             name="image"
