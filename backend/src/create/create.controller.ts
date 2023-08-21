@@ -29,4 +29,32 @@ export class CreateController {
       return { message: 'Team created' };
     }
   }
+
+  @Post('players')
+  async createPlayer(
+    @Body('name') name: string,
+    @Body('country') country: string,
+    @Body('image') image: string,
+    @Body('nick') nick: string,
+    @Body('teamId') teamId: number,
+    @Body('role') role: string,
+    @Body('age') age: number,
+    @Body('auth') auth: string,
+  ) {
+    if (auth !== 'secret') {
+      return { message: 'Not authorized' };
+    } else {
+      await this.createService.createProPlayer({
+        name,
+        country,
+        image,
+        nick,
+        teamId,
+        role,
+        age,
+        auth,
+      });
+      return { message: 'Player created' };
+    }
+  }
 }

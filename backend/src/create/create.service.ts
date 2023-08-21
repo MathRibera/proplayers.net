@@ -1,26 +1,43 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCreateDto } from './dto/create-create.dto';
-import { UpdateCreateDto } from './dto/update-create.dto';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class CreateService {
-  create(createCreateDto: CreateCreateDto) {
-    return 'This action adds a new create';
-  }
+  private prisma = new PrismaClient();
 
-  findAll() {
-    return `This action returns all create`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} create`;
-  }
-
-  update(id: number, updateCreateDto: UpdateCreateDto) {
-    return `This action updates a #${id} create`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} create`;
+  createProPlayer({
+    name,
+    country,
+    image,
+    nick,
+    teamId,
+    role,
+    age,
+    auth,
+  }: {
+    name: string;
+    country: string;
+    image: string;
+    nick: string;
+    teamId: number;
+    role: string;
+    age: number;
+    auth: string;
+  }) {
+    if (auth !== 'secret') {
+      return { message: 'Not authorized' };
+    } else {
+      return this.prisma.proPlayers.create({
+        data: {
+          name,
+          country,
+          image,
+          nick,
+          teamId,
+          role,
+          age,
+        },
+      });
+    }
   }
 }
