@@ -3,24 +3,32 @@ import Image from 'next/image'
 import { useState } from 'react';
 
 export default function Home() {
-  const [form, setForm] = useState({
+  const DEFAULT_VALUE = {
     name: '',
     country: '',
     image: '',
-    auth: 'secret'
+    auth: '',
+  }
+  const [form, setForm] = useState({
+    ...DEFAULT_VALUE,
+    success: false
   })
 
   const createTeam = async (e: any) => {
     e.preventDefault()
-    const res = await fetch('http://localhost:3000/api/create/team', {
+    if (form.auth !== 'secret') return alert('Wrong auth')
+    if (!form.name || !form.country || !form.image) return alert('Missing fields')
+    await fetch('http://localhost:3000/api/create/team', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(form)
     })
-    const data = await res.json()
-    console.log(data)
+    setForm({...DEFAULT_VALUE, success: true })
+    setTimeout(() => {
+      setForm({...DEFAULT_VALUE, success: false})
+    }, 2000)
   }
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-400">
@@ -38,6 +46,7 @@ export default function Home() {
             id="name"
             name="name"
             value={form.name}
+            className='rounded-lg mb-4 w-96 h-6'
             onChange={
               (e) => setForm({...form, name: e.target.value})
             }
@@ -51,6 +60,7 @@ export default function Home() {
             id="country"
             name="country"
             value={form.country}
+            className='mb-4 w-96 h-6 rounded-lg'
             onChange={
               (e) => setForm({...form, country: e.target.value})
             }
@@ -59,22 +69,35 @@ export default function Home() {
             htmlFor="image"
             className="mb-2 mt-2 border-t-2 border-black"
             >Logo team URL</label>
-          <input
-            type="text"
+          <textarea
             id="image"
             name="image"
             value={form.image}
-            className='mb-4 w-96 h-20'
+            className='mb-4 w-96 h-20 rounded-lg'
             onChange={
               (e) => setForm({...form, image: e.target.value})
+            }
+            />
+          <label
+            htmlFor="auth"
+            className="mb-2 mt-2 border-t-2 border-black"
+            >Auth</label>
+          <input
+            type="text"
+            id="auth"
+            name="auth"
+            value={form.auth}
+            onChange={
+              (e) => setForm({...form, auth: e.target.value})
             }
             />
           <button
             type="submit"
             onClick={createTeam}
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-1'
           >Create</button>
         </form>
+        {form.success && <p className="text-white text-center bg-green-500 w-full mt-1 text-white font-bold py-2 px-4 rounded">Team created</p>}
       </div>
     </main>
   )
