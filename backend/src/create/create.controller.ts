@@ -41,7 +41,6 @@ export class CreateController {
     @Body('age') age: string,
     @Body('auth') auth: string,
   ) {
-    console.log(name, country, image, nick, teamId, role, age, auth);
     if (auth !== 'secret') {
       return { message: 'Not authorized' };
     } else {
