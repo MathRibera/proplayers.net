@@ -13,6 +13,10 @@ export default async function Home() {
 
   return (
     <>
+    <head>
+      <title>ProPlayers.Net</title>
+      <meta name="description" content="ProPlayers.Net" />
+    </head>
     <div>
       <h1 className='text-center text-3xl mt-4'>ProPlayers.Net</h1>
       <div className='mt-4 w-3/4 m-auto'>
