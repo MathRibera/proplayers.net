@@ -1,14 +1,12 @@
 import { Team } from '@/interfaces/Team';
 import Head from 'next/head';
 import Image from 'next/image';
-import Script from 'next/script';
 
 const getData = async () => {
   const data = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/list/teams`)).json()
 
   return data
 }
-
 export default async function Home() {
 
   const teams: Team[] = await getData()
@@ -18,12 +16,6 @@ export default async function Home() {
       <Head>
         <title>ProPlayers.Net</title>
         <meta name="description" content="ProPlayers.Net" />
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}`}
-          strategy="lazyOnload"
-          crossOrigin="anonymous">
-        </Script>
       </Head>
       <div>
         <h1 className='text-center text-3xl mt-4'>ProPlayers.Net</h1>
