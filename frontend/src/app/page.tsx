@@ -19,7 +19,7 @@ export default async function Home() {
         <title>ProPlayers.Net</title>
         <meta name="description" content="ProPlayers.Net" />
         <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4810395988397983"
-          crossorigin="anonymous"></Script>
+          crossOrigin="anonymous"></Script>
       </Head>
       <div>
         <h1 className='text-center text-3xl mt-4'>ProPlayers.Net</h1>
