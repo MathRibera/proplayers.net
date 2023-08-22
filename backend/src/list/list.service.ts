@@ -10,7 +10,11 @@ export class ListService {
   }
 
   async findAllPlayers() {
-    return this.prisma.proPlayers.findMany();
+    return this.prisma.proPlayers.findMany({
+      include: {
+        team: true,
+      },
+    });
   }
 
   async findAllTeams() {
