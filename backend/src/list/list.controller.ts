@@ -10,6 +10,11 @@ export class ListController {
     return this.listService.findAllAccounts();
   }
 
+  @Get('players/:id')
+  findPlayerById(id: number) {
+    return this.listService.findPlayerById(id);
+  }
+
   @Get('players')
   findAllPlayers() {
     return this.listService.findAllPlayers();

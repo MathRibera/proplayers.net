@@ -9,6 +9,14 @@ export class ListService {
     return this.prisma.accounts.findMany();
   }
 
+  async findPlayerById(id: number) {
+    return this.prisma.proPlayers.findUnique({
+      where: {
+        id: id,
+      },
+    });
+  }
+
   async findAllPlayers() {
     return this.prisma.proPlayers.findMany({
       include: {
