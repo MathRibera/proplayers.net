@@ -24,10 +24,10 @@ export default function Home() {
       },
       body: JSON.stringify(form)
     })
-    setForm({...DEFAULT_VALUE, country: form.country, success: true })
+    setForm({...DEFAULT_VALUE, country: form.country, auth: form.auth, success: true })
     setTimeout(() => {
-      setForm({...DEFAULT_VALUE, country: form.country, success: false})
-    }, 2000)
+      setForm({...DEFAULT_VALUE, country: form.country, auth: form.auth, success: false})
+    }, 500)
   }
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-400">
