@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ListService } from './list.service';
 
 @Controller('api/list')
@@ -11,8 +11,8 @@ export class ListController {
   }
 
   @Get('players/:id')
-  findPlayerById(id: number, nick: string) {
-    return this.listService.findPlayerById(id, nick);
+  findPlayerById(@Query('id') id: string, @Query('nick') nick: string) {
+    return this.listService.findPlayerById(+id, nick);
   }
 
   @Get('players')
