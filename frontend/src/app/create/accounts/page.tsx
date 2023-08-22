@@ -48,6 +48,7 @@ export default function Home() {
     if (form.server === '') return alert('Select a server')
     if (form.nickName === '') return alert('Enter a nickname')
     const existsAccount = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/get/player/id=${form.proId}&nick=${form.nickName}`)).json()
+    console.log(existsAccount)
     if (existsAccount) return alert('This player already has an account')
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}api/create/account`
     const data = {

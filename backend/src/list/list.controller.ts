@@ -12,7 +12,7 @@ export class ListController {
 
   @Get('players/:id')
   findPlayerById(@Query('id') id: string, @Query('nick') nick: string) {
-    return this.listService.findPlayerById(+id, nick);
+    return this.listService.findAccountById(+id, nick);
   }
 
   @Get('players')

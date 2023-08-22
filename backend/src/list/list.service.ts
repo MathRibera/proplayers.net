@@ -9,7 +9,7 @@ export class ListService {
     return this.prisma.accounts.findMany();
   }
 
-  async findPlayerById(id: number, nick: string) {
+  async findAccountById(id: number, nick: string) {
     return this.prisma.accounts.findUnique({
       where: {
         id: id,
