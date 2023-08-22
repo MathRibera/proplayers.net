@@ -10,6 +10,7 @@ export default function Home() {
     region: '',
     proId: '',
     puuid: '',
+    players: [],
     enable: false,
   }
   const [form, setForm] = useState({
@@ -18,6 +19,11 @@ export default function Home() {
   })
 
   useEffect(() => {
+    const getData = async () => {
+      const proPlayers = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/list/players`)).json()
+      setForm({...form, players: proPlayers})
+    }
+    getData()
   }, [])
 
   const fetchSummonerData = async (url:string) => {
@@ -113,15 +119,15 @@ export default function Home() {
               htmlFor="proId"
               className="mb-2 mt-2 border-t-2 border-black"
               >ProId</label>
-            <input
-              type="text"
-              id="proId"
-              name="proId"
-              value={form.proId}
-              onChange={
-                async (e) => setForm({...form, proId: e.target.value})
-              }
-              />
+            <select
+              className='mb-4 w-96 h-6 rounded-lg'
+              onChange={(e) => setForm({...form, proId: e.target.value})}
+            >
+              <option value=""></option>
+              {form.players.map((player: any) => (
+                <option key={player.id} value={player.id}>{player.name} - {player.teamId}</option>
+              ))}
+            </select>
             <label
               htmlFor="puuid"
               className="mb-2 mt-2 border-t-2 border-black"
