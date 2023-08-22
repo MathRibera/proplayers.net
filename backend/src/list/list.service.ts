@@ -4,7 +4,12 @@ import { PrismaClient } from '@prisma/client';
 @Injectable()
 export class ListService {
   private prisma = new PrismaClient();
-  findAllTeams() {
+
+  async findAllAccounts() {
+    return this.prisma.accounts.findMany();
+  }
+
+  async findAllTeams() {
     return this.prisma.proTeams.findMany();
   }
 }

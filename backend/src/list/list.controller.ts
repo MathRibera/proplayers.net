@@ -5,6 +5,11 @@ import { ListService } from './list.service';
 export class ListController {
   constructor(private readonly listService: ListService) {}
 
+  @Get('accounts')
+  findAllAccounts() {
+    return this.listService.findAllAccounts();
+  }
+
   @Get('teams')
   findAllTeams() {
     return this.listService.findAllTeams();
