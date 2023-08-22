@@ -48,6 +48,7 @@ export default function Home() {
     if (form.server === '') return alert('Select a server')
     if (form.nickName === '') return alert('Enter a nickname')
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}api/create/account`
+
     const data = {
       nickName: form.nickName,
       server: form.server,
