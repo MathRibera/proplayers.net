@@ -5,7 +5,37 @@ import { PrismaClient } from '@prisma/client';
 export class CreateService {
   private prisma = new PrismaClient();
 
-  createProPlayer({
+  async createAccount({
+    nickName,
+    server,
+    region,
+    puuid,
+    proId,
+    auth,
+  }: {
+    nickName: string;
+    server: string;
+    region: string;
+    puuid: string;
+    proId: string;
+    auth: string;
+  }) {
+    if (auth !== 'secret') {
+      return { message: 'Not authorized' };
+    } else {
+      return this.prisma.accounts.create({
+        data: {
+          nickName,
+          server,
+          region,
+          puuid,
+          proId: +proId,
+        },
+      });
+    }
+  }
+
+  async createProPlayer({
     name,
     country,
     image,

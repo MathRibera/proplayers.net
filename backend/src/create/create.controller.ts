@@ -30,6 +30,29 @@ export class CreateController {
     }
   }
 
+  @Post('account')
+  async createAccount(
+    @Body('nickName') nickName: string,
+    @Body('server') server: string,
+    @Body('region') region: string,
+    @Body('puuid') puuid: string,
+    @Body('proId') proId: string,
+    @Body('auth') auth: string,
+  ) {
+    if (auth !== 'secret') {
+      return { message: 'Not authorized' };
+    } else {
+      return this.createService.createAccount({
+        nickName,
+        server,
+        region,
+        puuid,
+        proId,
+        auth,
+      });
+    }
+  }
+
   @Post('player')
   async createPlayer(
     @Body('name') name: string,
