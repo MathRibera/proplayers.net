@@ -47,8 +47,8 @@ export default function Home() {
     if (form.proId === '') return alert('Select a pro player')
     if (form.server === '') return alert('Select a server')
     if (form.nickName === '') return alert('Enter a nickname')
-    const existPlayer = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/get/player/${form.proId}`)).json()
-    if (existPlayer) return alert('This player already has an account')
+    const existsAccount = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/get/player/id=${form.proId}&nick=${form.nickName}`)).json()
+    if (existsAccount) return alert('This player already has an account')
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}api/create/account`
     const data = {
       nickName: form.nickName,
