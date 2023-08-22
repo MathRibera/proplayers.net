@@ -5,6 +5,12 @@ import Head from 'next/head';
 
 export default function Home() {
   const DEFAULT_VALUE = {
+    nickName: '',
+    proId: '',
+    puuid: '',
+    enable: false,
+  }
+  const [form, setForm] = useState({
     auth: '',
     nickName: '',
     server: '',
@@ -13,9 +19,6 @@ export default function Home() {
     puuid: '',
     players: [],
     enable: false,
-  }
-  const [form, setForm] = useState({
-    ...DEFAULT_VALUE,
     success: false
   })
 
@@ -40,6 +43,29 @@ export default function Home() {
   const createAccount = async (e: any) => {
     e.preventDefault()
     if (form.auth !== 'secret') return alert('Wrong auth')
+    if (form.puuid === '') return alert('Summoner not found or invalid region, change it and try again')
+    if (form.proId === '') return alert('Select a pro player')
+    if (form.server === '') return alert('Select a server')
+    if (form.nickName === '') return alert('Enter a nickname')
+    const existPlayer = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/get/player/${form.proId}`)).json()
+    if (existPlayer) return alert('This player already has an account')
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}api/create/account`
+    const data = {
+      nickName: form.nickName,
+      server: form.server,
+      region: form.region,
+      puuid: form.puuid,
+      proId: form.proId,
+      auth: form.auth,
+    }
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    setTimeout(() => {
+      setForm({...form, ...DEFAULT_VALUE, success: false})
+    }, 500)
   }
   return (
     <div>
@@ -162,7 +188,7 @@ export default function Home() {
               className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-1'
             >Create</button>
           </form>
-          {form.success && <p className="text-white text-center bg-green-500 w-full mt-1 text-white font-bold py-2 px-4 rounded">Team created</p>}
+          {form.success && <p className="text-white text-center bg-green-500 w-full mt-1 text-white font-bold py-2 px-4 rounded">Account created</p>}
           </div>
       </main>
     </div>
