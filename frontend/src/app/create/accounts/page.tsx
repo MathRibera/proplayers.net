@@ -44,8 +44,8 @@ export default function Home() {
   return (
     <div>
       <Head>
-      <title>Register Accounts</title>
-      <meta name="description" content="ProPlayers.Net" />
+        <title>Register Accounts</title>
+        <meta name="description" content="ProPlayers.Net" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-400">
         <div className="flex flex-col items-center border-2 border-black p-2 rounded-lg">
