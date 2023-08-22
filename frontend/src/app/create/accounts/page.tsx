@@ -20,7 +20,7 @@ export default function Home() {
 
   useEffect(() => {
     const getData = async () => {
-      const proPlayers = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/list/players`)).json()
+      const proPlayers = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/list/players`)).json()
       setForm({...form, players: proPlayers})
     }
     getData()
@@ -125,7 +125,7 @@ export default function Home() {
             >
               <option value=""></option>
               {form.players.map((player: any) => (
-                <option key={player.id} value={player.id}>{player.name} - {player.teamId}</option>
+                <option key={player.id} value={player.id}>{player.name} - {player.team.name}</option>
               ))}
             </select>
             <label
