@@ -1,6 +1,7 @@
 "use client";
 import { Summoner } from '@/interfaces/SummonerJson';
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 
 export default function Home() {
   const DEFAULT_VALUE = {
@@ -42,10 +43,10 @@ export default function Home() {
   }
   return (
     <div>
-      <head>
+      <Head>
       <title>Register Accounts</title>
       <meta name="description" content="ProPlayers.Net" />
-    </head>
+      </Head>
       <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-400">
         <div className="flex flex-col items-center border-2 border-black p-2 rounded-lg">
           <h1>Register Accounts</h1>
