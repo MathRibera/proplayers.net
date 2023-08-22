@@ -9,6 +9,10 @@ export class ListService {
     return this.prisma.accounts.findMany();
   }
 
+  async findAllPlayers() {
+    return this.prisma.proPlayers.findMany();
+  }
+
   async findAllTeams() {
     return this.prisma.proTeams.findMany();
   }
