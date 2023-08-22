@@ -11,8 +11,8 @@ export class ListController {
   }
 
   @Get('players/:id')
-  findPlayerById(id: number) {
-    return this.listService.findPlayerById(id);
+  findPlayerById(id: number, nick: string) {
+    return this.listService.findPlayerById(id, nick);
   }
 
   @Get('players')
