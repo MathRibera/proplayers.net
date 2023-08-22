@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-400">
       <head>
-        <title>Create Players ProPlayers.net</title>
+        <title>Register Players</title>
       </head>
       <div className="flex flex-col items-center border-2 border-black p-2 rounded-lg">
         <h1>Create Players</h1>
