@@ -1,5 +1,12 @@
 "use client";
+import { Team } from '@/interfaces/Team';
 import { useEffect, useState } from 'react';
+
+const getData = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_DEV}api/list/teams`)
+  const data = await res.json()
+  return data
+}
 
 export default function Home() {
   const DEFAULT_VALUE = {
@@ -38,9 +45,9 @@ export default function Home() {
       },
       body: JSON.stringify(form)
     })
-    setForm({...DEFAULT_VALUE, teams: form.teams, success: true })
+    setForm({...DEFAULT_VALUE, teams: form.teams, auth: form.auth, success: true })
     setTimeout(() => {
-      setForm({...DEFAULT_VALUE, teams: form.teams, success: false})
+      setForm({...DEFAULT_VALUE, teams: form.teams, auth: form.auth, success: false})
     }, 500)
   }
   return (

@@ -2,7 +2,7 @@ import { Team } from '@/interfaces/Team';
 import Image from 'next/image';
 
 const getData = async () => {
-  const data = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_DEV}api/list/teams`)).json()
+  const data = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/list/teams`)).json()
 
   return data
 }
@@ -10,23 +10,6 @@ const getData = async () => {
 export default async function Home() {
 
   const teams: Team[] = await getData()
-
-  // const [info, setInfo] = useState({
-  //   teams: [],
-  //   loadingTeams: true,
-  //   loadingPlayers: true,
-  // })
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_DEV}api/list/teams`)).json()
-  //     setInfo({
-  //       teams: data,
-  //       loadingTeams: false,
-  //       loadingPlayers: false,
-  //     })
-  //   }
-  //   fetchData()
-  // }, []);
 
   return (
     <>
