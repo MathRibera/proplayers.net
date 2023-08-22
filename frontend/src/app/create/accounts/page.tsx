@@ -118,6 +118,7 @@ export default function Home() {
               className='mb-4 w-96 h-6 rounded-lg'
               onChange={(e) => {
                 const url = `https://${e.target.value}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(form.nickName)}?api_key=${process.env.NEXT_PUBLIC_API_TOKEN}`
+                setForm({...form, region: e.target.value})
                 fetchSummonerData(url)
               }
             }
