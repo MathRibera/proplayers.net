@@ -10,15 +10,14 @@ export default function Home() {
     loading: true
   })
   useEffect(() => {
-    const batata = async () => {
+    const fetchData = async () => {
       const data = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL_DEV}api/list/teams`)).json()
       setInfo({
         teams: data,
         loading: false
       })
     }
-    batata()
-    console.log(info.teams)
+    fetchData()
   }, []);
 
   return (

@@ -24,9 +24,9 @@ export default function Home() {
       },
       body: JSON.stringify(form)
     })
-    setForm({...DEFAULT_VALUE, success: true })
+    setForm({...DEFAULT_VALUE, country: form.country, success: true })
     setTimeout(() => {
-      setForm({...DEFAULT_VALUE, success: false})
+      setForm({...DEFAULT_VALUE, country: form.country, success: false})
     }, 2000)
   }
   return (
@@ -54,16 +54,21 @@ export default function Home() {
             htmlFor="country"
             className="mt-2 mb-2 border-t-2 border-black"
             >Country</label>
-          <input
-            type="text"
-            id="country"
-            name="country"
-            value={form.country}
+          <select
             className='mb-4 w-96 h-6 rounded-lg'
-            onChange={
-              (e) => setForm({...form, country: e.target.value})
-            }
-            />
+            onChange={(e) => setForm({...form, country: e.target.value})}
+          >
+            <option value="North America">North America</option>
+            <option value="Brazil">Brazil</option>
+            <option value="Europe">Europe</option>
+            <option value="Korea">Korea</option>
+            <option value="China">China</option>
+            <option value="Asia Pacific">Asia Pacific</option>
+            <option value="Vietnam">Vietnam</option>
+            <option value="Japan">Japan</option>
+            <option value="Latin America">Latin America</option>
+            <option value="Oceania">Oceania</option>
+          </select>
           <label
             htmlFor="image"
             className="mb-2 mt-2 border-t-2 border-black"
