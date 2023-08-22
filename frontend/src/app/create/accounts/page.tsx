@@ -10,6 +10,7 @@ export default function Home() {
     region: '',
     proId: '',
     puuid: '',
+    enable: false,
   }
   const [form, setForm] = useState({
     ...DEFAULT_VALUE,
@@ -19,7 +20,17 @@ export default function Home() {
   useEffect(() => {
   }, [])
 
-  const createPlayer = async (e: any) => {
+  const fetchSummonerData = async (url:string) => {
+    try {
+      const puuid: Summoner = await (await fetch(url)).json()
+      setForm({...form, puuid: puuid.puuid, enable: true})
+    } catch (e) {
+      alert('Summoner not found or invalid region, change it and try again')
+      setForm({...form, enable: false})
+    }
+  }
+
+  const createAccount = async (e: any) => {
     e.preventDefault()
     if (form.auth !== 'secret') return alert('Wrong auth')
   }
@@ -74,11 +85,9 @@ export default function Home() {
               >Region</label>
             <select
               className='mb-4 w-96 h-6 rounded-lg'
-              onChange={async (e) => {
-                setForm({...form, region: e.target.value})
-              const puuid: Summoner = await (await fetch(`https://${form.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(form.nickName)}?api_key=${process.env.NEXT_PUBLIC_API_TOKEN}`)).json()
-              console.log(puuid)
-              setForm({...form, puuid: puuid.puuid})
+              onChange={(e) => {
+                const url = `https://${e.target.value}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(form.nickName)}?api_key=${process.env.NEXT_PUBLIC_API_TOKEN}`
+                fetchSummonerData(url)
               }
             }
             >
@@ -141,6 +150,8 @@ export default function Home() {
                 />
             <button
               type="submit"
+              disabled={!form.enable}
+              onClick={createAccount}
               className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-1'
             >Create</button>
           </form>
