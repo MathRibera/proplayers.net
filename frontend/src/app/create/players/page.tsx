@@ -41,7 +41,7 @@ export default function Home() {
     setForm({...DEFAULT_VALUE, teams: form.teams, success: true })
     setTimeout(() => {
       setForm({...DEFAULT_VALUE, teams: form.teams, success: false})
-    }, 2000)
+    }, 500)
   }
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-400">
