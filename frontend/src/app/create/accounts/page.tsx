@@ -47,28 +47,23 @@ export default function Home() {
     if (form.proId === '') return alert('Select a pro player')
     if (form.server === '') return alert('Select a server')
     if (form.nickName === '') return alert('Enter a nickname')
-    try{
-      const existsAccount = await (await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}api/get/player/id=${form.proId}&nick=${form.nickName}`)).json()
-      if (existsAccount) return alert('This player already has an account')
-    } catch (e) {
-      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}api/create/account`
-      const data = {
-        nickName: form.nickName,
-        server: form.server,
-        region: form.region,
-        puuid: form.puuid,
-        proId: form.proId,
-        auth: form.auth,
-      }
-      await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      setTimeout(() => {
-        setForm({...form, ...DEFAULT_VALUE, success: false})
-      }, 500)
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}api/create/account`
+    const data = {
+      nickName: form.nickName,
+      server: form.server,
+      region: form.region,
+      puuid: form.puuid,
+      proId: form.proId,
+      auth: form.auth,
     }
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    setTimeout(() => {
+      setForm({...form, ...DEFAULT_VALUE, success: false})
+    }, 500)
   }
   return (
     <div>
